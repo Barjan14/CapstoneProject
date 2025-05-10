@@ -25,4 +25,6 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('api/sensor-data/', SensorDataView.as_view()),
+    #path('api/motion-events/', MotionEventView.as_view()),
 ]
+
