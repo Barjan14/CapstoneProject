@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from api.views import RegisterView, SensorDataView
+from api.views import RegisterView, SensorDataView, MotionEventView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +25,6 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
     path('api/sensor-data/', SensorDataView.as_view()),
-    #path('api/motion-events/', MotionEventView.as_view()),
+    path('api/motion-events/', MotionEventView.as_view()),
 ]
 

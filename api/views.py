@@ -37,14 +37,14 @@ class SensorDataView(APIView):
             for event in events
         ])
     
-    class MotionEventView(APIView):
-      permission_classes = [IsAuthenticated]
+  
+class MotionEventView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        # Fetch motion events for the logged-in user
-        events = MotionEvent.objects.filter(user=request.user)
-        motion_data = [
-            {"id": event.id, "timestamp": event.timestamp, "detected": event.detected}
-            for event in events
+        # Example static motion data; replace with actual database queries later
+        data = [
+            {"timestamp": "2025-05-11T10:00:00Z", "motion": True},
+            {"timestamp": "2025-05-11T10:05:00Z", "motion": False},
         ]
-        return Response(motion_data, status=status.HTTP_200_OK) 
+        return Response(data)
