@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getMotionEvents } from './api';
+import './Dashboard.css';
 
 function Dashboard({ token }) {
   const [motionEvents, setMotionEvents] = useState([]);
@@ -10,9 +11,9 @@ function Dashboard({ token }) {
       try {
         const res = await getMotionEvents(token);
         setMotionEvents(res.data);
-        setLoading(false);
       } catch (err) {
         console.error(err);
+      } finally {
         setLoading(false);
       }
     };
@@ -21,27 +22,31 @@ function Dashboard({ token }) {
   }, [token]);
 
   return (
-    <div className="dashboard-container">
-      <h2>Motion Sensor Dashboard</h2>
+    <div className="ocean-dashboard">
+      <h2 className="dashboard-heading"> Security Alarm Motion Sensor</h2>
       {loading ? (
-        <p>Loading motion events...</p>
+        <p className="dashboard-loading">Retrieving wave data...</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Timestamp</th>
-              <th>Detected</th>
-            </tr>
-          </thead>
-          <tbody>
-            {motionEvents.map((event) => (
-              <tr key={event.id}>
-                <td>{new Date(event.timestamp).toLocaleString()}</td>
-                <td>{event.detected ? 'Yes' : 'No'}</td>
+        <div className="dashboard-table-container">
+          <table className="dashboard-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Motion Detected</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {motionEvents.map((event) => (
+                <tr key={event.id}>
+                  <td>{new Date(event.timestamp).toLocaleString()}</td>
+                  <td className={event.detected ? 'detected' : 'not-detected'}>
+                    {event.detected ? 'Yes' : 'No'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
