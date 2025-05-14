@@ -12,6 +12,6 @@ export const getMotionEvents = (token) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
-export const register = (username, password) =>
-API.post("register/", { username, password });
-
+// ✅ Updated register function to include email
+export const register = (username, email, password) =>
+  API.post("register/", { username, email, password });
