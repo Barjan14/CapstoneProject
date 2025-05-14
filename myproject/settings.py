@@ -79,9 +79,6 @@ AUTH_USER_MODEL = 'api.User'
 CORS_ALLOW_ALL_ORIGINS = True
 
 
-
-
-
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
