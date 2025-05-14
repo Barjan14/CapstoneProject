@@ -14,6 +14,19 @@ from .utils.token_generator import email_verification_token
 
 User = get_user_model()
 
+def send_verification_email(user):
+    uid = urlsafe_base64_encode(force_bytes(user.pk))
+    token = default_token_generator.make_token(user)
+    activation_link = f"http://localhost:3000/verify-email/{uid}/{token}/"  # React frontend route
+
+    send_mail(
+        'Activate Your Account',
+        f'Hi {user.username}, please click the link to verify your account: {activation_link}',
+        settings.DEFAULT_FROM_EMAIL,
+        [user.email],
+        fail_silently=False,
+    )
+    
 class RegisterView(APIView):
     permission_classes = [AllowAny]
 
