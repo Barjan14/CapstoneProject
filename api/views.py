@@ -11,6 +11,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
 from .utils.token_generator import email_verification_token
+from django.utils.timezone import now
+from .serializers import MotionEventSerializer
 
 User = get_user_model()
 
@@ -26,7 +28,7 @@ def send_verification_email(user):
         [user.email],
         fail_silently=False,
     )
-    
+
 class RegisterView(APIView):
     permission_classes = [AllowAny]
 
@@ -78,12 +80,29 @@ class SensorDataView(APIView):
 class MotionEventView(APIView):
     permission_classes = [IsAuthenticated]
 
+    def post(self, request):
+        """
+        Records a new motion event for the authenticated user.
+        """
+        motion = request.data.get("motion")
+
+        if isinstance(motion, bool):
+            event = MotionEvent.objects.create(
+                user=request.user,
+                motion=motion,
+                timestamp=now()  # Server-side timestamp
+            )
+            return Response({"message": "Motion event recorded"}, status=status.HTTP_201_CREATED)
+        
+        return Response({"error": "Invalid or missing 'motion' field. Must be a boolean."}, status=status.HTTP_400_BAD_REQUEST)
+
     def get(self, request):
-        data = [
-            {"timestamp": "2025-05-11T10:00:00Z", "motion": True},
-            {"timestamp": "2025-05-11T10:05:00Z", "motion": False},
-        ]
-        return Response(data)
+        """
+        Returns all motion events for the authenticated user.
+        """
+        events = MotionEvent.objects.filter(user=request.user).order_by("-timestamp")
+        serializer = MotionEventSerializer(events, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ActivateAccountView(APIView):
