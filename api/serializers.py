@@ -4,4 +4,4 @@ from .models import MotionEvent
 class MotionEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = MotionEvent
-        fields = ['timestamp', 'motion']
+        fields = ['id', 'timestamp', 'motion']  

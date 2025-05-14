@@ -81,20 +81,28 @@ class MotionEventView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        """
+        Records a new motion event for the authenticated user.
+        """
         motion = request.data.get("motion")
-        if motion is not None:
+
+        if isinstance(motion, bool):
             event = MotionEvent.objects.create(
                 user=request.user,
                 motion=motion,
                 timestamp=now()  # Server-side timestamp
             )
-            return Response({"message": "Motion event recorded"}, status=201)
-        return Response({"error": "Invalid data"}, status=400)
+            return Response({"message": "Motion event recorded"}, status=status.HTTP_201_CREATED)
+        
+        return Response({"error": "Invalid or missing 'motion' field. Must be a boolean."}, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request):
+        """
+        Returns all motion events for the authenticated user.
+        """
         events = MotionEvent.objects.filter(user=request.user).order_by("-timestamp")
-        serialized = MotionEventSerializer(events, many=True)
-        return Response(serialized.data)
+        serializer = MotionEventSerializer(events, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class ActivateAccountView(APIView):
