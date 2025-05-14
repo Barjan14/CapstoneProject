@@ -1,6 +1,6 @@
-// src/RegisterForm.js
 import React, { useState } from 'react';
 import { register } from './api';
+import './RegisterForm.css';  // Import the CSS file
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -17,12 +17,21 @@ function RegisterForm() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <input value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
-      <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
-      <button onClick={handleRegister}>Register</button>
-      {message && <p>{message}</p>}
+    <div className="register-form">
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={e => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+      />
+      <button className="register-button" onClick={handleRegister}>REGISTER</button>
+      {message && <p className="message">{message}</p>}
     </div>
   );
 }
