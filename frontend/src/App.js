@@ -42,13 +42,13 @@ function App() {
             className={activeTab === 'register' ? 'active' : ''}
             onClick={() => setActiveTab('register')}
           >
-            REGISTER
+            SIGN UP
           </button>
           <button
             className={activeTab === 'login' ? 'active' : ''}
             onClick={() => setActiveTab('login')}
           >
-            LOGIN
+            SIGN IN
           </button>
         </div>
         <div className="tab-content">
