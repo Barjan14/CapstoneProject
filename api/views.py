@@ -19,7 +19,7 @@ User = get_user_model()
 def send_verification_email(user):
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     token = default_token_generator.make_token(user)
-    activation_link = f"http://localhost:3000/verify-email/{uid}/{token}/"  # React frontend route
+    activation_link = f"https://ipt.netlify.app/verify-email/{uid}/{token}/"  # React frontend route
 
     send_mail(
         'Activate Your Account',
@@ -47,7 +47,7 @@ class RegisterView(APIView):
             token = default_token_generator.make_token(user)
 
             # Create activation link
-            activation_link = f"http://localhost:8000/api/activate/{uid}/{token}/"
+            activation_link = f"https://ipt.netlify.app/verify-email/{uid}/{token}/"
 
             # Send the email with the activation link
             send_mail(
