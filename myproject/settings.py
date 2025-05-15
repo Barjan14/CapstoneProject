@@ -144,4 +144,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bryle.jan14@gmail.com'
 EMAIL_HOST_PASSWORD = 'k l z a m q y b f s w z f g m i'  # Not your actual Gmail password!
 DEFAULT_FROM_EMAIL = 'bryle.jan14@gmail.com'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
