@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: "http://192.168.100.223:8000/api/", // ✅ Use local network IP, not localhost
+  baseURL: "https://capstoneproject-yqlu.onrender.com/api/", // ✅ Use local network IP, not localhost
 });
 
 // Login function
