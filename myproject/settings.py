@@ -95,7 +95,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bryle.jan14@gmail.com'
-EMAIL_HOST_PASSWORD = 'klzamqybfswzfgmi'  # Be cautious with sensitive data
+EMAIL_HOST_PASSWORD = 'k q v e b r x h x j z q c r g r'  # Be cautious with sensitive data
 DEFAULT_FROM_EMAIL = 'bryle.jan14@gmail.com'
 
 if DEBUG:
