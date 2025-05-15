@@ -11,8 +11,10 @@ djangorestframework_simplejwt==5.5.0
 fastapi==0.115.12
 filelock==3.18.0
 greenlet==3.1.1
+gunicorn==23.0.0
 h11==0.14.0
 idna==3.10
+packaging==25.0
 platformdirs==4.3.8
 psycopg2-binary==2.9.10
 pydantic==2.11.3
